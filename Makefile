@@ -4,6 +4,12 @@
 SRC := srcs
 COMPOSE = docker compose
 
+image:
+	docker image ls -a
+	
+container:
+	docker container ls -a
+
 build:
 	cd $(SRC) && $(COMPOSE) build
 

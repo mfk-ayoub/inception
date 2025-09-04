@@ -5,3 +5,12 @@ services:
     build: ./requirements/nginx
     ports:
       - "443:443"
+
+
+secrets:
+  db_password.txt:
+    file: ./secrets/db_password.txt
+  db_root_password.txt:
+    file: ./secrets/db_root_password.txt
+  credentials.txt:
+    file: ./secrets/credentials.txt
