@@ -1,19 +1,22 @@
 
 .PHONY: build up down restart 
 
+SRC := srcs
+COMPOSE = docker compose
+
 build:
-	cd srcs && docker compose build
+	cd $(SRC) && $(COMPOSE) build
 
 up:
-	cd srcs && docker compose up
+	cd $(SRC) && $(COMPOSE) up
 
 upd:
-	cd srcs && docker compose up --build
+	cd $(SRC) && $(COMPOSE) up --build
 
 down:
-	cd srcs && docker compose down
+	cd $(SRC) && $(COMPOSE) down
 
 restart:
-	cd srcs && docker compose down
-	cd srcs && docker compose up --build
+	cd $(SRC) && $(COMPOSE) down
+	cd $(SRC) && $(COMPOSE) up --build
 

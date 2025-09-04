@@ -1,8 +1,15 @@
 FROM debian:latest
 
-RUN apt update -y && apt upgrade -y && apt install -y nginx
+WORKDIR /app
 
-COPY . /tools 
+RUN apt-get update -y && \
+    apt-get upgrade -y && \
+    apt-get install -y nginx && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY tools /tools
+
 RUN chmod +x /tools/script.sh
 
-CMD ["script.sh"]
+ENTRYPOINT [ "bash" ]
+CMD ["/tools/script.sh"]
