@@ -6,7 +6,6 @@ COMPOSE = docker compose
 
 image:
 	docker image ls -a
-	
 container:
 	docker container ls -a
 

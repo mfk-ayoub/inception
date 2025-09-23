@@ -1,11 +1,21 @@
+version: "3.8"
+
 services:
   nginx:
-    image: nginx
     container_name: nginx
     build: ./requirements/nginx
     ports:
       - "443:443"
 
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb
+    ports:
+      - "3306:3306"
+    secrets:
+      - db_password.txt
+      - db_root_password.txt
+      - credentials.txt
 
 secrets:
   db_password.txt:
