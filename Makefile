@@ -1,27 +1,26 @@
-
-.PHONY: build up down restart 
+.PHONY: all build up upd down restart image container
 
 SRC := srcs
-COMPOSE = docker compose
+COMPOSE := docker compose
+
+all: build up
 
 image:
-	docker image ls -a
+	$(COMPOSE) -f $(SRC)/docker-compose.yml images
+
 container:
-	docker container ls -a
+	$(COMPOSE) -f $(SRC)/docker-compose.yml ps -a
 
 build:
-	cd $(SRC) && $(COMPOSE) build
+	$(COMPOSE) -f $(SRC)/docker-compose.yml build
 
 up:
-	cd $(SRC) && $(COMPOSE) up
+	$(COMPOSE) -f $(SRC)/docker-compose.yml up -d
 
 upd:
-	cd $(SRC) && $(COMPOSE) up --build
+	$(COMPOSE) -f $(SRC)/docker-compose.yml up --build -d
 
 down:
-	cd $(SRC) && $(COMPOSE) down
+	$(COMPOSE) -f $(SRC)/docker-compose.yml down
 
-restart:
-	cd $(SRC) && $(COMPOSE) down
-	cd $(SRC) && $(COMPOSE) up --build
-
+restart: down upd
