@@ -3,6 +3,10 @@ from cryptography.x509.oid import NameOID
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import rsa
 from datetime import datetime, timedelta
+import os
+
+os.makedirs("/etc/ssl/private", exist_ok=True)
+os.makedirs("/etc/ssl/certs", exist_ok=True)
 
 key = rsa.generate_private_key(
     public_exponent=65537,
@@ -13,7 +17,7 @@ subject = x509.Name([
     x509.NameAttribute(NameOID.COUNTRY_NAME, "MA"),
     x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, "Morocco"),
     x509.NameAttribute(NameOID.LOCALITY_NAME, "Casablanca"),
-    x509.NameAttribute(NameOID.ORGANIZATION_NAME, "MyOrg"),
+    x509.NameAttribute(NameOID.ORGANIZATION_NAME, "1337"),
     x509.NameAttribute(NameOID.COMMON_NAME, "localhost"),
 ])
 
