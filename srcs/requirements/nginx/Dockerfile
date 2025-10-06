@@ -10,7 +10,7 @@ RUN apt-get update -y && \
 RUN pip3 install cryptography
 
 COPY tools /tools
-RUN chmod +x /tools/*.sh
+RUN chmod +x /tools/script.sh
 
 COPY conf/default.conf /etc/nginx/conf.d/default.conf
 
