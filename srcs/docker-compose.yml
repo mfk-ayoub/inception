@@ -1,10 +1,12 @@
 services:
+
   nginx:
     image: nginx
     container_name: nginx
     build: ./requirements/nginx
     ports:
       - "443:443"
+    restart: always
 
   mariadb:
     image: mariadb
@@ -17,8 +19,8 @@ services:
     image: wordpress
     container_name: wordpress
     build: ./requirements/wordpress
-    volumes:
-      - wordpress:/var/www/html
+    # volumes:
+    #   - wordpress:/var/www/html
     networks:
       - inception
     expose:
@@ -26,29 +28,30 @@ services:
 
 networks:
   inception:
+    driver: bridge
     name: inception
 
-volumes:
-  mariadb:
-    name: mariadb
-    driver: local
-    driver_opts:
-      device: /home/ayel-mou/data
-      o: bind
-      type: none
+# volumes:
+#   mariadb:
+#     name: mariadb
+#     driver: local
+#     driver_opts:
+#       device: /home/ayel-mou/data
+#       o: bind
+#       type: none
 
-  wordpress:
-    name: wordpress
-    driver: local
-    driver_opts:
-      device: /home/ayel-mou/data
-      o: bind
-      type: none
+#   wordpress:
+#     name: wordpress
+#     driver: local
+#     driver_opts:
+#       device: /home/ayel-mou/data
+#       o: bind
+#       type: none
 
-secrets:
-  db_password:
-    file: ../secrets/db_password.txt
-  user_password:
-    file: ../secrets/user_password.txt
-  db_root_password:
-    file: ../secrets/db_root_password.txt
+# secrets:
+#   db_password:
+#     file: ../secrets/db_password.txt
+#   user_password:
+#     file: ../secrets/user_password.txt
+#   db_root_password:
+#     file: ../secrets/db_root_password.txt
