@@ -18,7 +18,8 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -out /etc/ssl/certs/ayel-mou.crt \
     -subj="/C=MA/ST=benguerir/L=benguerir/O=1337 School/OU=ayel-mou/CN=ayel-mou.42.fr"
 
-    COPY tools/script.sh /tools/script.sh
+COPY tools/script.sh /tools/script.sh
+
 RUN chmod +x /tools/script.sh
 
 COPY conf/default.conf /etc/nginx/conf.d/default.conf

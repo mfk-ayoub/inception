@@ -2,5 +2,6 @@
 
 
 sudo service mariadb start
+mysql -u root -p
 
-mariadb -e 
+mariadb -e  "CREATE DATABASE test"

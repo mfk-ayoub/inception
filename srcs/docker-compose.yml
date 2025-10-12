@@ -7,6 +7,8 @@ services:
     ports:
       - "443:443"
     restart: always
+    networks:            
+      - inception 
 
   mariadb:
     image: mariadb
@@ -14,6 +16,8 @@ services:
     build: ./requirements/mariadb
     ports:
       - "3306:3306"
+    networks:          
+      - inception 
 
   wordpress:
     image: wordpress

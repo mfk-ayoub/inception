@@ -11,4 +11,4 @@ RUN chmod +x /tools/setup.sh
 
 EXPOSE 3306
 
-ENTRYPOINT [ "setup.sh" ]
+ENTRYPOINT [ "tools/setup.sh" ]

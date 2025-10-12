@@ -25,5 +25,7 @@ down:
 
 fdown:
 	$(COMPOSE) -f $(SRC)/docker-compose.yml down --rmi all
-	
+
+ps:
+	docker ps 
 restart: down upd
