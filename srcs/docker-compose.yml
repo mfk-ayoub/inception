@@ -7,55 +7,58 @@ services:
     ports:
       - "443:443"
     restart: always
+    env_file:
+      - .env
     networks:            
       - inception 
 
-  mariadb:
-    image: mariadb
-    container_name: mariadb
-    build: ./requirements/mariadb
-    ports:
-      - "3306:3306"
-    networks:          
-      - inception 
+#   mariadb:
+#     image: mariadb
+#     container_name: mariadb
+#     build: ./requirements/mariadb
+#     ports:
+#       - "3306:3306"
+#     # restart: always
+#     networks:          
+#       - inception 
 
-  wordpress:
-    image: wordpress
-    container_name: wordpress
-    build: ./requirements/wordpress
-    volumes:
-      - wordpress:/var/www/html
-    networks:
-      - inception
-    expose:
-      - "9000"
+#   wordpress:
+#     image: wordpress
+#     container_name: wordpress
+#     build: ./requirements/wordpress
+#     volumes:
+#       - wordpress:/var/www/html
+#     networks:
+#       - inception
+#     expose:
+#       - "9000"
 
 networks:
   inception:
     driver: bridge
     name: inception
 
-volumes:
-  mariadb:
-    name: mariadb
-    driver: local
-    driver_opts:
-      device: /home/inception/Desktop/inception/srcs/requirements/mariadb
-      o: bind
-      type: none
+# volumes:
+#   mariadb:
+#     name: mariadb
+#     driver: local
+#     driver_opts:
+#       device: /home/inception/Desktop/inception/srcs/requirements/mariadb
+#       o: bind
+#       type: none
 
-  wordpress:
-    name: wordpress
-    driver: local
-    driver_opts:
-      device: /home/inception/Desktop/inception/srcs/requirements/wordpress
-      o: bind
-      type: none
+#   wordpress:
+#     name: wordpress
+#     driver: local
+#     driver_opts:
+#       device: /home/inception/Desktop/inception/srcs/requirements/wordpress
+#       o: bind
+#       type: none
 
-secrets:
-  db_password:
-    file: ../secrets/db_password.txt
-  user_password:
-    file: ../secrets/user_password.txt
-  db_root_password:
-    file: ../secrets/db_root_password.txt
+# secrets:
+#   db_password:
+#     file: ../secrets/db_password.txt
+#   user_password:
+#     file: ../secrets/user_password.txt
+#   db_root_password:
+#     file: ../secrets/db_root_password.txt
