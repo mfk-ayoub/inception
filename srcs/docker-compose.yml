@@ -7,8 +7,6 @@ services:
     ports:
       - "443:443"
     restart: always
-    env_file:
-      - .env
     networks:            
       - inception 
 
@@ -17,3 +15,4 @@ networks:
   inception:
     driver: bridge
     name: inception
+

@@ -1,4 +1,4 @@
-.PHONY: all build up upd down restart image container
+: all build up upd down restart image container
 
 SRC := srcs
 COMPOSE := docker compose

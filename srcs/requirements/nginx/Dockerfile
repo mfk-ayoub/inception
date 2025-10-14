@@ -1,17 +1,21 @@
 FROM debian:latest
 
-RUN apt update -y && \
-    apt install -y nginx openssl curl vim && \
+
+
+RUN apt-get update -y && \
+    apt-get upgrade -y && \
+    apt-get install -y nginx python3 python3-pip openssl python3-cryptography && \
     rm -rf /var/lib/apt/lists/*
 
-COPY	conf/default.conf /etc/nginx/conf.d/default.conf
-RUN     chmod 777 /etc/nginx/conf.d/default.conf
-COPY tools/generate-ssl.sh /usr/local/bin/
+RUN rm -f /etc/nginx/conf.d/default.conf
 
-RUN chmod +x /usr/local/bin/generate-ssl.sh
+RUN echo '<h1>allo </h1>' > /var/www/html/index.html
+COPY tools /tools
+RUN chmod +x /tools/setup_ssl.sh
+RUN chmod +x /tools/generate_ssl.py
 
-CMD  [ "/usr/local/bin/generate-ssl.sh" ]
+COPY conf/default.conf /etc/nginx/conf.d/default.conf
 
+EXPOSE 443
 
-
-
+CMD ["/tools/setup_ssl.sh"]
