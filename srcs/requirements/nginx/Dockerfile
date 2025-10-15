@@ -16,6 +16,5 @@ RUN chmod +x /tools/generate_ssl.py
 
 COPY conf/default.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 443
 
 CMD ["/tools/setup_ssl.sh"]

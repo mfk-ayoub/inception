@@ -28,4 +28,10 @@ fdown:
 
 ps:
 	docker ps 
+
+v:
+	docker volume ls
+net:
+	docker network ls
+
 restart: down upd
