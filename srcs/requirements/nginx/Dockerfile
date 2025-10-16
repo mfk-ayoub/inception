@@ -3,9 +3,16 @@ FROM debian:latest
 
 
 RUN apt-get update -y && \
-    apt-get upgrade -y && \
-    apt-get install -y nginx python3 python3-pip openssl python3-cryptography && \
+    apt-get install -y \
+        nginx \
+        python3 \
+        python3-pip \
+        openssl \
+        python3-cryptography \
+        curl \
+        nano && \
     rm -rf /var/lib/apt/lists/*
+
 
 RUN rm -f /etc/nginx/conf.d/default.conf
 
