@@ -1,20 +1,12 @@
 #!/bin/bash
 
-# L'variables dyal l'Database (khasshom ikounou f'Docker Compose dyalek)
-# Wlahad l'exemple ghan3tihom chi defaults ila makaininch
-
-if [ -z "$HOST_NAME" ]; then
-    WORDPRESS_DB_HOST="mysql"
+if command -v wp &> /dev/null
+then
+    echo "WP-CLI is already installed."
+else    
+    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+    
+    chmod +x wp-cli.phar
+ 
+    mv wp-cli.phar /usr/local/bin/wp
 fi
-
-# N'creeriw l'wp-config.php ila makaynch
-if [ ! -f wp-config.php ]; then
-    wp config create \
-        --dbname="$DB_DATABASE" \
-        --dbuser="$WORDPRESS_DB_USER" \
-        --dbpass="$WORDPRESS_DB_PASSWORD" \
-        --dbhost="$WORDPRESS_DB_HOST" \
-        --allow-root
-fi
-
-exec php-fpm

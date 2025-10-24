@@ -22,6 +22,17 @@ services:
       - inception
     env_file:
       - .env
+  wordpress:
+    build:
+      context: ./requirements/wordpress
+    container_name: wordpress
+    ports:
+      - "9000:9000" 
+    env_file:
+      - .env 
+    restart: always
+    networks:
+      - inception
 secrets:
   wp_db_pass:
     file: ./secrets/db_password.txt
