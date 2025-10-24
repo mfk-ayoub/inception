@@ -7,8 +7,8 @@ services:
     ports:
       - "443:443"
     restart: always
-    # networks:            
-    #   - inception
+    networks:            
+      - inception
     env_file:
       - .env
   mariadb:
@@ -22,7 +22,11 @@ services:
       - inception
     env_file:
       - .env
-
+secrets:
+  wp_db_pass:
+    file: ./secrets/db_password.txt
+  wp_db_root_pass:
+    file: ./secrets/db_root_password.txt
 
 networks:
   inception:
