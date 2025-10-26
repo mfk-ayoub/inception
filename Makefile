@@ -1,30 +1,20 @@
-: all build up upd down restart image container
-
-SRC := srcs
-COMPOSE := docker compose
-
-all: build up
-
-image:
-	$(COMPOSE) -f $(SRC)/docker-compose.yml images
-
-container:
-	$(COMPOSE) -f $(SRC)/docker-compose.yml ps -a
-
-build:
-	$(COMPOSE) -f $(SRC)/docker-compose.yml build
-
-up:
-	$(COMPOSE) -f $(SRC)/docker-compose.yml up -d
-
-upd:
-	$(COMPOSE) -f $(SRC)/docker-compose.yml up --build -d
-
+all:
+	mkdir -p /home/inception/Desktop/inception/mariadb
+	mkdir -p /home/inception/Desktop/inception/wordpress
+	
+	sudo chown -R inception:inception  /home/inception/Desktop/inception/mariadb
+	sudo chown -R inception:inception /home/inception/Desktop/inception/wordpress
+	cd srcs && docker compose up --build -d
 down:
-	$(COMPOSE) -f $(SRC)/docker-compose.yml down
+	cd srcs && docker compose down
 
-fdown:
-	$(COMPOSE) -f $(SRC)/docker-compose.yml down --rmi all
+clean:
+	cd srcs && docker compose down --rmi all -v
+
+fclean:
+	cd srcs &&  docker compose down --rmi all -v
+	sudo rm -rf /home/inception/Desktop/inception/mariadb
+	sudo rm -rf /home/inception/Desktop/inception/wordpress
 
 ps:
 	docker ps 
@@ -33,5 +23,13 @@ v:
 	docker volume ls
 net:
 	docker network ls
+	
 
-restart: down upd
+re: fclean all 
+
+.PHONY: all down clean fclean re
+
+
+
+
+

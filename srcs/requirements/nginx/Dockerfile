@@ -1,18 +1,14 @@
-FROM debian:latest
+FROM debian:bullseye
 
-RUN apt-get update -y && \
-    apt-get install -y \
-        nginx \
-        openssl \
-        curl \
-        nano && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt update && apt install -y nginx  openssl
 
-RUN rm -f /etc/nginx/conf.d/default.conf
+COPY	conf/nginx.conf /etc/nginx/sites-available/default
+RUN     chmod 777 /etc/nginx/sites-available/default
 
-RUN echo '<h1>allo </h1>' > /var/www/html/index.html
-COPY tools /tools
-RUN chmod +x /tools/setup_ssl.sh
-COPY conf/nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 443
 
-CMD ["/tools/setup_ssl.sh"]
+COPY tools/setupssl.sh /usr/local/bin/setupssl.sh
+RUN chmod +x /usr/local/bin/setupssl.sh
+
+CMD ["/usr/local/bin/setupssl.sh"]
+

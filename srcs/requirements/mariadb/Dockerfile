@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM debian:bullseye
 
 RUN apt-get update && apt-get install -y \
     mariadb-server \
@@ -7,10 +7,11 @@ RUN apt-get update && apt-get install -y \
 RUN mkdir -p /var/run/mysqld \
     && mkdir -p /var/lib/mysql
 
-COPY conf/db.conf /etc/mysql/mariadb.conf.d/50-server.cnf
+COPY conf/server.conf /etc/mysql/mariadb.conf.d/50-server.cnf
 
-COPY tools /tools
-RUN chmod +x /tools/create_db.sh
+COPY tools/setupdb.sh /usr/local/bin/setupdb.sh 
 
+RUN chmod +x /usr/local/bin/setupdb.sh && \
+    chown mysql:mysql /usr/local/bin/setupdb.sh
 
-CMD ["/tools/create_db.sh"]
+ENTRYPOINT ["/usr/local/bin/setupdb.sh"]

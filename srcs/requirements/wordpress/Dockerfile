@@ -1,21 +1,22 @@
-FROM debian:latest
+FROM debian:bullseye
 
-RUN apt-get update -y && \
-    apt-get install -y \
-        php-fpm \
-        curl && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y php-fpm php-mysql -y \
+    mariadb-client \
+    wget \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /run/php
+RUN chown -R www-data:www-data /run/php
+
+COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
+
+RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN chmod +x wp-cli.phar
+RUN mv wp-cli.phar /usr/local/bin/wp
+
+COPY tools/setup.sh /usr/local/bin/setup.sh
+
+RUN chmod +x /usr/local/bin/setup.sh
 
 
-RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
-    chmod +x wp-cli.phar && \
-    mv wp-cli.phar /usr/local/bin/wp
-
-RUN mkdir -p /var/www/html && \
-    chown -R www-data:www-data /var/www/html
-
-COPY tools/configuer_wp.sh /usr/bin/configuer_wp.sh
-RUN chmod +x /usr/bin/configuer_wp.sh
-
-CMD ["/usr/bin/configuer_wp.sh"]
+ENTRYPOINT ["/usr/local/bin/setup.sh"]
