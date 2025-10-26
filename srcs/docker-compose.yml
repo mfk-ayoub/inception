@@ -1,56 +1,60 @@
-services:
 
+services:
   nginx:
-    image: nginx
-    container_name: nginx
     build: ./requirements/nginx
+    container_name: nginx
+    image: nginx
     ports:
       - "443:443"
-    restart: always
-    networks:            
-      - inception
-    env_file:
-      - .env
-  mariadb:
-    image: mariadb
-    container_name: mariadb
-    build: ./requirements/mariadb
-    ports:
-      - "3306:3306"
-    restart: always
-    networks:            
-      - inception
-    env_file:
-      - .env
-  wordpress:
-    image: wordpress
-    container_name: wordpress
-    build:
-      context: ./requirements/wordpress
-    ports:
-      - "9000:9000"
-    env_file:
-      - .env 
-    restart: always
+    restart: always 
+    depends_on:
+      - wordpress
     networks:
-      - inception
+      - inception_network
+    env_file:
+      - .env
+    volumes:
+      - volume_wordpress:/var/www/wordpress
+  wordpress:
+    build: ./requirements/wordpress
+    container_name: wordpress
+    image: wordpress
     depends_on:
       - mariadb
-    secrets:
-      - wp_db_pass
-      - wp_admin_user
-      - wp_db_root_pass
+    restart: always 
+    networks:
+      - inception_network
+    env_file:
+      - .env
+    volumes:
+      - volume_wordpress:/var/www/wordpress
 
-
-secrets:
-  wp_db_pass:
-    file: ./secrets/db_password.txt
-  wp_db_root_pass:
-    file: ./secrets/db_root_password.txt
-  wp_admin_user:
-    file: ./secrets/credentials.txt
+  mariadb:
+    build: ./requirements/mariadb
+    container_name: mariadb
+    image: mariadb
+    restart: always 
+    networks:
+      - inception_network
+    env_file:
+      - .env
+    volumes:
+      - volume_mariadb:/var/lib/mysql
 
 networks:
-  inception:
+  inception_network:
     driver: bridge
-    name: inception
+
+volumes:
+  volume_mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/inception/Inception
+  volume_wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/inception/Inception
