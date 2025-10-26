@@ -55,13 +55,13 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/inception/Inception
+      device: /home/inception/Desktop/inception/mariadb 
   volume_wordpress:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/inception/Inception
+      device: /home/inception/Desktop/inception/wordpress
 secrets:
   db_password:
     file: ../secrets/db_password.txt
