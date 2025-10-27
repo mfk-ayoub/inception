@@ -1,9 +1,8 @@
-
 services:
   nginx:
     build: ./requirements/nginx
     container_name: nginx
-    image: nginx
+    image: nginx:ayel-mou
     ports:
       - "443:443"
     restart: always 
@@ -15,10 +14,11 @@ services:
       - .env
     volumes:
       - volume_wordpress:/var/www/wordpress
+      
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
-    image: wordpress
+    image: wordpress:ayel-mou
     depends_on:
       - mariadb
     restart: always 
@@ -31,10 +31,11 @@ services:
       - user_and_passowrd
     volumes:
       - volume_wordpress:/var/www/wordpress
+      
   mariadb:
     build: ./requirements/mariadb
     container_name: mariadb
-    image: mariadb
+    image: mariadb:ayel-mou
     restart: always 
     networks:
       - inception_network
@@ -49,6 +50,7 @@ services:
 networks:
   inception_network:
     driver: bridge
+    
 volumes:
   volume_mariadb:
     driver: local
@@ -62,6 +64,7 @@ volumes:
       type: none
       o: bind
       device: /home/ayel-mou/data/wordpress
+      
 secrets:
   db_password:
     file: ../secrets/db_password.txt
