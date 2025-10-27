@@ -1,7 +1,7 @@
 FROM debian:bullseye
 
 RUN apt-get update && apt-get install -y php-fpm php-mysql -y \
-    mariadb-client \
+    mailutils \
     wget \
  && rm -rf /var/lib/apt/lists/*
 

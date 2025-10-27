@@ -1,10 +1,9 @@
 all:
-	mkdir -p /home/inception/Desktop/inception/mariadb
-	mkdir -p /home/inception/Desktop/inception/wordpress
+	sudo mkdir -p /home/ayel-mou/data/mariadb
+	sudo mkdir -p /home/ayel-mou/data/wordpress
 	
-	sudo chown -R inception:inception  /home/inception/Desktop/inception/mariadb
-	sudo chown -R inception:inception /home/inception/Desktop/inception/wordpress
 	cd srcs && docker compose up --build -d
+
 down:
 	cd srcs && docker compose down
 
@@ -12,24 +11,33 @@ clean:
 	cd srcs && docker compose down --rmi all -v
 
 fclean:
-	cd srcs &&  docker compose down --rmi all -v
-	sudo rm -rf /home/inception/Desktop/inception/mariadb
-	sudo rm -rf /home/inception/Desktop/inception/wordpress
+	cd srcs && docker compose down --rmi all -v
+	sudo rm -rf /home/ayel-mou/data/mariadb
+	sudo rm -rf /home/ayel-mou/data/wordpress
 
 ps:
 	docker ps 
 
-v:
+volume:
 	docker volume ls
+
 net:
-	docker network ls
+	docker compose -f srcs/docker-compose.yml networks
+
+image:
+	docker compose -f srcs/docker-compose.yml images
+
+container:
+	docker compose -f srcs/docker-compose.yml ps -a
+
+logsm:
+	docker logs mariadb
+logswp:
+	docker logs wordpress
+logsn:
+	docker logs nginx
 	
 
 re: fclean all 
 
-.PHONY: all down clean fclean re
-
-
-
-
-
+.PHONY: all down clean fclean re ps v net
