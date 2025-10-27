@@ -28,7 +28,7 @@ services:
       - .env
     secrets:
       - db_password
-      - user_password
+      - user_and_passowrd
     volumes:
       - volume_wordpress:/var/www/wordpress
   mariadb:
@@ -65,7 +65,7 @@ volumes:
 secrets:
   db_password:
     file: ../secrets/db_password.txt
-  user_password:
-    file: ../secrets/user_password.txt
+  user_and_passowrd:
+    file: ../secrets/credentials.txt
   db_root_password:
     file: ../secrets/db_root_password.txt

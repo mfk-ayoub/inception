@@ -8,7 +8,8 @@ cd /var/www/wordpress
 
 WORDPRESS_DB_PASSWORD="$(cat /run/secrets/db_password)"
 
-USER_PASSWORD="$(cat /run/secrets/user_password)"
+WORDPRESS_DB_USER="$(sed -n '1p' /run/secrets/user_and_passowrd)"
+USER_PASSWORD="$(sed -n '2p' /run/secrets/user_and_passowrd)"
 
 if [ ! -f "wp-config.php" ]; then
   echo "downloading wordpress core files"
