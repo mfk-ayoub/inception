@@ -7,9 +7,9 @@ chown -R mysql:mysql /var/lib/mysql
 ROOT_PASSWORD="$(cat /run/secrets/db_root_password)"
 WORDPRESS_DB_PASSWORD="$(cat /run/secrets/db_password)"
 
-first_time=0
+flag=0
 if [ ! -f "/var/lib/mysql/.initialized" ]; then
-  first_time=1
+  flag=1
 
   mysql_install_db --user=mysql --datadir=/var/lib/mysql --auth-root-authentication-method=normal
 
