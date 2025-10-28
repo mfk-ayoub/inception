@@ -23,6 +23,8 @@ services:
     restart: always 
     networks:
       - inception_network
+    volumes:
+      - volume_myresume:/usr/share/nginx/html/
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
@@ -72,6 +74,12 @@ volumes:
       type: none
       o: bind
       device: /home/ayel-mou/data/wordpress
+  volume_myresume:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/inception/Desktop/ince/srcs/requirements/bonus/myresume
 
 secrets:
   db_password:
