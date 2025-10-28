@@ -3,17 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>my resume : ayoub elmouafik</title>
+    <title>My Resume - Ayoub Elmouafik</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
-    <div>
-        <h1>about me</h1>
-    </div>
-    <div>
-        <h1>my projects</h1>     
-    </div>
-    <div>
-        <h1>my eduction</h1>
+    <div class="container">
+        <header>
+            <h1>Ayoub Elmouafik</h1>
+            <p>Software Developer</p>
+            <div class="contact-info">
+                <a href="mailto:elmouafikayoub23@gmail.com">📧 elmouafikayoub23@gmail.com</a>
+                <a href="https://github.com/mfk-ayoub" target="_blank">🔗 GitHub</a>
+                <a href="https://linkedin.com/in/ayoub-elmouafik" target="_blank">💼 LinkedIn</a>
+            </div>
+        </header>
+        
+        <div class="section">
+            <h2>About Me</h2>
+            <div class="about-content">
+                                <p>
+                    Passionate software developer with a strong foundation in C/C++ programming, artificial intelligence, 
+                    and machine learning. I am dedicated to creating efficient, scalable solutions and exploring the 
+                    intersection of systems programming and AI. With experience in low-level programming and emerging 
+                    technologies, I thrive in solving complex algorithmic challenges.
+                </p>
+                <p>
+                    I am constantly learning new technologies in AI/ML and best practices in software development. 
+                    My goal is to build intelligent, high-performance applications that leverage the power of machine 
+                    learning and robust system-level programming.
+                </p>
+            </div>
+            
+            <div class="skills">
+                <span class="skill-tag">HTML/CSS</span>
+                <span class="skill-tag">c/c++</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">SQL</span>
+                <span class="skill-tag">docker</span>
+                <span class="skill-tag">bash</span>
+
+            </div>
+        </div>
+        
+          <div class="project-item">
+                <h3>🖥️ Minishell</h3>
+                <p class="date">2024</p>
+                <p>
+                    A custom Unix shell implementation that replicates bash functionality. Features include 
+                    command execution, piping, redirections, environment variable handling, and built-in commands. 
+                    Developed in C with a focus on process management and system calls.
+                </p>
+                <a href="https://github.com/mfk-ayoub/minishell" target="_blank" style="color: #667eea; text-decoration: none;">
+                    🔗 View on GitHub
+                </a>
+            </div>
+            
+            <div class="project-item">
+                <h3>💬 Minitalk</h3>
+                <p class="date">2024</p>
+                <p>
+                    A data exchange program using UNIX signals. Implements client-server communication where 
+                    the client sends strings to the server using only SIGUSR1 and SIGUSR2 signals. 
+                    Demonstrates low-level inter-process communication in C.
+                </p>
+                <a href="https://github.com/mfk-ayoub/minitalk" target="_blank" style="color: #667eea; text-decoration: none;">
+                    🔗 View on GitHub
+                </a>
+            </div>
+            
+            <div class="project-item">
+                <h3>🔢 Push_swap</h3>
+                <p class="date">2023</p>
+                <p>
+                    An efficient sorting algorithm project using two stacks and a limited set of operations. 
+                    Optimizes the number of instructions needed to sort integers, implementing various sorting 
+                    strategies. Written in C with emphasis on algorithm optimization.
+                </p>
+                <a href="https://github.com/mfk-ayoub/push_swap" target="_blank" style="color: #667eea; text-decoration: none;">
+                    🔗 View on GitHub
+                </a>
+            </div> 
+        <footer>
+            <p>&copy; 2025 Ayoub Elmouafik. All rights reserved.</p>
+        </footer>
     </div>
 </body>
-</html>

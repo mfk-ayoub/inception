@@ -1,0 +1,126 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-transform: capitalize;
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .section {
+            padding: 40px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-transform: capitalize;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .about-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+        }
+        
+        .contact-info a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        
+        .project-item, .education-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+        }
+        
+        .project-item h3, .education-item h3 {
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        
+        .project-item p, .education-item p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .date {
+            color: #764ba2;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .skill-tag {
+            background-color: #667eea;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
