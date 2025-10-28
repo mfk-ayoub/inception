@@ -14,7 +14,15 @@ services:
       - .env
     volumes:
       - volume_wordpress:/var/www/wordpress
-      
+  site:
+    build: ./requirements/bonus/myresume
+    container_name: myresume
+    image: myresume:ayel-mou
+    ports:
+      - "8080:8080"
+    restart: always 
+    networks:
+      - inception_network
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
@@ -64,7 +72,7 @@ volumes:
       type: none
       o: bind
       device: /home/ayel-mou/data/wordpress
-      
+
 secrets:
   db_password:
     file: ../secrets/db_password.txt
