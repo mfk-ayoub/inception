@@ -45,6 +45,8 @@ executewp:
 
 executemd:
 	@cd srcs &&  docker compose exec mariadb  bash 
+executjupeter:
+	@cd srcs &&  docker compose exec jupyter  bash 
 re: fclean all 
 
 .PHONY: all down clean fclean re ps v net

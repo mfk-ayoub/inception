@@ -19,12 +19,24 @@ services:
     container_name: myresume
     image: myresume:ayel-mou
     ports:
-      - "8080:8080"
+      - "4242:4242"
     restart: always 
     networks:
       - inception_network
+
+  jupyter:
+    build: ./requirements/bonus/jupyter
+    container_name: jupyter
+    image: jupyter:ayel-mou
+    ports:
+      - "8888:8888"
+    restart: always
+    networks:
+      - inception_network
     volumes:
-      - volume_myresume:/usr/share/nginx/html/
+      - ./srcs:/requirements/bonus/jupyter/src
+    working_dir: /workspace/srcs
+
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
@@ -74,12 +86,13 @@ volumes:
       type: none
       o: bind
       device: /home/ayel-mou/data/wordpress
-  volume_myresume:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/inception/Desktop/ince/srcs/requirements/bonus/myresume
+  # volume_myresume:
+  #   driver: local
+  #   driver_opts:
+  #     type: none
+  #     o: bind
+  #     device: ./requirements/bonus/myresume
+
 
 secrets:
   db_password:

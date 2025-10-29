@@ -1,10 +1,11 @@
 FROM debian:bullseye
 
-RUN apt update && apt install -y nginx 
+RUN apt-get update && apt-get install -y nginx && rm -rf /var/lib/apt/lists/*
 
-COPY site/ /usr/share/nginx/html/
-COPY conf/ayoub.conf /etc/nginx/sites-available/default
+COPY conf/ayoub.conf /etc/nginx/conf.d/ayoub.conf
+RUN chmod +x  /etc/nginx/conf.d/ayoub.conf
 
-RUN chmod 777 /etc/nginx/sites-available/default
+COPY site/ /var/www/html/
+
 
 CMD ["nginx", "-g", "daemon off;"]
