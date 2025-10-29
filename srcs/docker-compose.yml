@@ -23,7 +23,8 @@ services:
     restart: always 
     networks:
       - inception_network
-
+    volumes:
+      - ./requirements/bonus/myresume/site:/var/www/html/
   jupyter:
     build: ./requirements/bonus/jupyter
     container_name: jupyter
@@ -34,8 +35,9 @@ services:
     networks:
       - inception_network
     volumes:
-      - ./srcs:/requirements/bonus/jupyter/src
+      - ./requirements/bonus/jupyter/src:/workspace/srcs
     working_dir: /workspace/srcs
+
 
   wordpress:
     build: ./requirements/wordpress
@@ -86,12 +88,7 @@ volumes:
       type: none
       o: bind
       device: /home/ayel-mou/data/wordpress
-  # volume_myresume:
-  #   driver: local
-  #   driver_opts:
-  #     type: none
-  #     o: bind
-  #     device: ./requirements/bonus/myresume
+
 
 
 secrets:
