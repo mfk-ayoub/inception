@@ -1,1 +1,4 @@
 # srcs/.env
+srcs/requirements/bonus/jupyter/src/.ipynb_checkpoints/
+
+.ipynb_checkpoints/
