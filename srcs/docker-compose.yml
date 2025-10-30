@@ -9,7 +9,7 @@ services:
     depends_on:
       - wordpress
     networks:
-      - inception_network
+      - inception
     env_file:
       - .env
     volumes:
@@ -22,7 +22,7 @@ services:
       - "4242:4242"
     restart: always 
     networks:
-      - inception_network
+      - inception
     volumes:
       - ./requirements/bonus/myresume/site:/var/www/html/
   jupyter:
@@ -33,7 +33,7 @@ services:
       - "8888:8888"
     restart: always
     networks:
-      - inception_network
+      - inception
     volumes:
       - ./requirements/bonus/jupyter/src:/workspace/srcs
     working_dir: /workspace/srcs
@@ -47,7 +47,7 @@ services:
       - mariadb
     restart: always 
     networks:
-      - inception_network
+      - inception
     env_file:
       - .env
     secrets:
@@ -62,7 +62,7 @@ services:
     image: mariadb:ayel-mou
     restart: always 
     networks:
-      - inception_network
+      - inception
     env_file:
       - .env
     secrets:
@@ -70,9 +70,18 @@ services:
       - db_root_password
     volumes:
       - volume_mariadb:/var/lib/mysql
+  adminer:
+    build: ./requirements/bonus/adminer
+    image: adminer:ayel-mou
+    container_name: adminer
+    ports:
+      - "8083:8083"
+    restart: always 
+    networks:
+      - inception
 
 networks:
-  inception_network:
+  inception:
     driver: bridge
     
 volumes:
