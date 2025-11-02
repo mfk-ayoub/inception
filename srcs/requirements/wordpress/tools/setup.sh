@@ -39,6 +39,16 @@ if [ ! -f "wp-config.php" ]; then
     "$USER" "$USER_EMAIL" \
     --role=author \
     --user_pass="$USER_PASSWORD"
+
+  
+  echo "\nInstalling and configuring Redis Object Cache..."
+
+  wp plugin install redis-cache --activate --allow-root
+  wp config set WP_CACHE true --raw --allow-root
+  wp redis enable --allow-root
+  
+  echo "Redis Cache enabled."
+
 else
   echo "WordPress already installed, skipping install steps."
 fi

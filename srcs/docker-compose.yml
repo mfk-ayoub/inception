@@ -1,8 +1,8 @@
 services:
   nginx:
     build: ./requirements/nginx
-    container_name: nginx
     image: nginx:ayel-mou
+    container_name: nginx
     ports:
       - "443:443"
     restart: always 
@@ -14,37 +14,13 @@ services:
       - .env
     volumes:
       - volume_wordpress:/var/www/wordpress
-  site:
-    build: ./requirements/bonus/myresume
-    container_name: myresume
-    image: myresume:ayel-mou
-    ports:
-      - "4242:4242"
-    restart: always 
-    networks:
-      - inception
-    volumes:
-      - ./requirements/bonus/myresume/site:/var/www/html/
-  jupyter:
-    build: ./requirements/bonus/jupyter
-    container_name: jupyter
-    image: jupyter:ayel-mou
-    ports:
-      - "8888:8888"
-    restart: always
-    networks:
-      - inception
-    volumes:
-      - ./requirements/bonus/jupyter/src:/workspace/srcs
-    working_dir: /workspace/srcs
-
-
   wordpress:
     build: ./requirements/wordpress
-    container_name: wordpress
     image: wordpress:ayel-mou
+    container_name: wordpress
     depends_on:
       - mariadb
+      - redis
     restart: always 
     networks:
       - inception
@@ -58,8 +34,8 @@ services:
       
   mariadb:
     build: ./requirements/mariadb
-    container_name: mariadb
     image: mariadb:ayel-mou
+    container_name: mariadb
     restart: always 
     networks:
       - inception
@@ -79,6 +55,39 @@ services:
     restart: always 
     networks:
       - inception
+  redis:
+    build: ./requirements/bonus/redis
+    image: redis:ayel-mou
+    container_name: redis
+    restart: always
+    networks:
+      - inception
+    volumes:
+      - redis-data:/data
+  site:
+    build: ./requirements/bonus/myresume
+    image: myresume:ayel-mou
+    container_name: myresume
+    ports:
+      - "4242:4242"
+    restart: always 
+    networks:
+      - inception
+    volumes:
+      - ./requirements/bonus/myresume/site:/var/www/html/
+  jupyter:
+    build: ./requirements/bonus/jupyter
+    image: jupyter:ayel-mou
+    container_name: jupyter
+    ports:
+      - "8888:8888"
+    restart: always
+    networks:
+      - inception
+    volumes:
+      - ./requirements/bonus/jupyter/src:/workspace/srcs
+    working_dir: /workspace/srcs
+
 
 networks:
   inception:
@@ -97,7 +106,7 @@ volumes:
       type: none
       o: bind
       device: /home/ayel-mou/data/wordpress
-
+  redis-data: {} 
 
 
 secrets:
