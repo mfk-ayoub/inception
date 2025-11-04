@@ -29,6 +29,7 @@ services:
     secrets:
       - db_password
       - user_and_passowrd
+      - redis_password
     volumes:
       - volume_wordpress:/var/www/wordpress
       
@@ -55,6 +56,7 @@ services:
     restart: always 
     networks:
       - inception
+
   redis:
     build: ./requirements/bonus/redis
     image: redis:ayel-mou
@@ -64,6 +66,9 @@ services:
       - inception
     volumes:
       - redis-data:/data
+    secrets:
+      - redis_password
+
   site:
     build: ./requirements/bonus/myresume
     image: myresume:ayel-mou
@@ -134,3 +139,5 @@ secrets:
     file: ../secrets/credentials.txt
   db_root_password:
     file: ../secrets/db_root_password.txt
+  redis_password:
+    file: ../secrets/redis_pass.txt
