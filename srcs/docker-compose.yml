@@ -88,10 +88,27 @@ services:
       - ./requirements/bonus/jupyter/src:/workspace/srcs
     working_dir: /workspace/srcs
 
+  ftp:
+    build: ./requirements/bonus/ftp
+    image: ftp:ayel-mou
+    container_name: ftp
+    ports:
+      - "21:21"
+      - "21100-21110:21100-21110"
+    restart: always
+    depends_on:
+      - wordpress
+    networks:
+      - inception
+    env_file:
+      - .env 
+    volumes:
+      - volume_wordpress:/var/www/wordpress
 
 networks:
   inception:
     driver: bridge
+    name: inception
     
 volumes:
   volume_mariadb:

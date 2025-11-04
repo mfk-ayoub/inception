@@ -21,8 +21,6 @@ ps:
 volume:
 	@docker volume ls
 
-net:
-	@docker compose -f srcs/docker-compose.yml networks
 
 image:
 	@docker compose -f srcs/docker-compose.yml images
@@ -45,8 +43,7 @@ executewp:
 
 executemd:
 	@cd srcs &&  docker compose exec mariadb  bash 
-executjupeter:
-	@cd srcs &&  docker compose exec jupyter  bash 
+
 re: fclean all 
 
 .PHONY: all down clean fclean re ps v net
