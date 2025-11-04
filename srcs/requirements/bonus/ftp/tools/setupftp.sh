@@ -7,7 +7,6 @@ echo "Starting script ..."
 
 mkdir -p $FTP_HOME_DIR
 
-
 echo /bin/false >> /etc/shells
 
 useradd -d $FTP_HOME_DIR -s /bin/false ${FTP_USER}
