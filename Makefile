@@ -1,7 +1,7 @@
 all:
 	sudo mkdir -p /home/ayel-mou/data/mariadb
 	sudo mkdir -p /home/ayel-mou/data/wordpress
-	
+
 	@cd srcs && docker compose up --build -d
 
 down:

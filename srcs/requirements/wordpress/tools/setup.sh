@@ -2,7 +2,8 @@
 set -e
 
 mkdir -p /var/www/wordpress
-chown -R www-data:www-data /var/www/wordpress
+# chown -R www-data:www-data /var/www/wordpress
+
 
 cd /var/www/wordpress
 
@@ -56,4 +57,7 @@ else
 fi
 
 echo "Starting PHP-FPM..."
+# chown -R nobody:nogroup /var/www/wordpress 
+chown -R www-data:www-data /var/www/wordpress
+
 exec php-fpm7.4 -F
